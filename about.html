@@ -415,65 +415,85 @@
 
                                         </form>
                                         <script>
+const form = document.getElementById("mc_signup_form");
+const btn = document.getElementById("mc_signup_submit");
+const msg = document.getElementById("newsletter-msg");
 
-                                            const form = document.getElementById("mc_signup_form");
-                                            const btn = document.getElementById("mc_signup_submit");
-                                            const msg = document.getElementById("newsletter-msg");
+const scriptURL = "https://script.google.com/macros/s/AKfycbw7_JM3fqj_0q_40z92sbyScDHzTzVORgd1Par2bdgjEvjYEAwjPjWxxp1ZQIFqUWq7/exechttps://script.google.com/macros/s/AKfycbw7_JM3fqj_0q_40z92sbyScDHzTzVORgd1Par2bdgjEvjYEAwjPjWxxp1ZQIFqUWq7/exec";
 
-                                            const scriptURL = "https://script.google.com/macros/s/AKfycbw7_JM3fqj_0q_40z92sbyScDHzTzVORgd1Par2bdgjEvjYEAwjPjWxxp1ZQIFqUWq7/exec";
+form.addEventListener("submit", async function (e) {
 
-                                            form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-                                                e.preventDefault();
+    msg.innerHTML = "";
+    msg.className = "";
 
-                                                msg.innerHTML = "";
-                                                msg.className = "";
+    btn.disabled = true;
+    btn.value = "Submitting...";
 
-                                                btn.disabled = true;
-                                                btn.value = "Submitting...";
+    const formData = new FormData(form);
 
-                                                fetch(scriptURL, {
-                                                    method: "POST",
-                                                    body: new FormData(form)
-                                                })
-                                                    .then(res => res.json())
-                                                    .then(data => {
+    try {
 
-                                                        btn.disabled = false;
-                                                        btn.value = "Subscribe";
+        const response = await fetch(scriptURL, {
+            method: "POST",
+            body: formData,
+            redirect: "follow"
+        });
 
-                                                        if (data.status === "success") {
+        const text = await response.text();
+        console.log("Raw Response:", text);
 
-                                                            msg.innerHTML = "Subscribed successfully!";
-                                                            msg.className = "success";
-                                                            form.reset();
+        let data;
 
-                                                        } else if (data.status === "exists") {
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            throw new Error("Invalid JSON returned: " + text);
+        }
 
-                                                            msg.innerHTML = "Already subscribed.";
-                                                            msg.className = "error";
+        console.log("Parsed Response:", data);
 
-                                                        } else {
+        btn.disabled = false;
+        btn.value = "Subscribe";
 
-                                                            msg.innerHTML = "Something went wrong.";
-                                                            msg.className = "error";
+        switch (data.status) {
 
-                                                        }
+            case "success":
+                msg.innerHTML = "Subscribed successfully!";
+                msg.className = "success";
+                form.reset();
+                break;
 
-                                                    })
-                                                    .catch(err => {
+            case "exists":
+                msg.innerHTML = "Already subscribed.";
+                msg.className = "error";
+                break;
 
-                                                        btn.disabled = false;
-                                                        btn.value = "Subscribe";
+            case "error":
+                msg.innerHTML = data.message || "Something went wrong.";
+                msg.className = "error";
+                break;
 
-                                                        msg.innerHTML = "Server error.";
-                                                        msg.className = "error";
+            default:
+                msg.innerHTML = "Unexpected server response.";
+                msg.className = "error";
+                console.log(data);
+        }
 
-                                                    });
+    } catch (error) {
 
-                                            });
+        console.error(error);
 
-                                        </script>
+        btn.disabled = false;
+        btn.value = "Subscribe";
+
+        msg.innerHTML = "Server error. Check browser console.";
+        msg.className = "error";
+    }
+
+});
+</script>
 
                                     </div>
                                 </div>
