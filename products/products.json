@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "title": "Joliday Jalapeño",
+    "description": "A playful jalapeño-inspired ornament, perfect for adding a spicy touch of whimsy to any festive display or gift box.",
+    "oldPrice": 22,
+    "price": 16,
+    "mainImage": "products/img/1.jpg",
+    "gallery": [
+      "products/img/1.jpg",
+      "products/img/2.jpg",
+      "products/img/3.jpg",
+      "products/img/4.jpg"
+    ],
+    "colors": [
+      "Green",
+      "Red",
+      "Gold"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Texas Trinket Tray",
+    "description": "A charming ceramic tray inspired by the wide-open skies of Texas, ideal for jewelry, keys, or tiny keepsakes.",
+    "oldPrice": 24,
+    "price": 18,
+    "mainImage": "products/img/2.jpg",
+    "gallery": [
+      "products/img/2.jpg",
+      "products/img/3.jpg",
+      "products/img/4.jpg",
+      "products/img/5.jpg"
+    ],
+    "colors": [
+      "Ivory",
+      "Sky Blue",
+      "Terracotta"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Salt Seller",
+    "description": "A minimalist salt cellar with a gentle curve, designed to keep your favorite finishing salt at arm’s reach on the table.",
+    "oldPrice": 14,
+    "price": 10,
+    "mainImage": "products/img/3.jpg",
+    "gallery": [
+      "products/img/3.jpg",
+      "products/img/4.jpg",
+      "products/img/5.jpg",
+      "products/img/6.jpg"
+    ],
+    "colors": [
+      "White",
+      "Charcoal",
+      "Sand"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Disco Ball Tray",
+    "description": "A glossy tray with a disco ball shimmer, perfect for candles, jewelry, or as a sparkling centerpiece.",
+    "oldPrice": 28,
+    "price": 22,
+    "mainImage": "products/img/4.jpg",
+    "gallery": [
+      "products/img/4.jpg",
+      "products/img/5.jpg",
+      "products/img/6.jpg",
+      "products/img/7.jpg"
+    ],
+    "colors": [
+      "Silver",
+      "Rose Gold",
+      "Pearl"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Santorini Earrings",
+    "description": "Lightweight earrings inspired by Santorini’s blue domes and whitewashed walls, ideal for everyday or special occasions.",
+    "oldPrice": 24,
+    "price": 18,
+    "mainImage": "products/img/5.jpg",
+    "gallery": [
+      "products/img/5.jpg",
+      "products/img/6.jpg",
+      "products/img/7.jpg",
+      "products/img/8.jpg"
+    ],
+    "colors": [
+      "Cobalt Blue",
+      "White",
+      "Gold"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Cowboy Boot Tray",
+    "description": "A petite tray shaped like a cowboy boot, made for rings, coins, or tiny treasures with a dash of western charm.",
+    "oldPrice": 20,
+    "price": 16,
+    "mainImage": "products/img/6.jpg",
+    "gallery": [
+      "products/img/6.jpg",
+      "products/img/7.jpg",
+      "products/img/8.jpg",
+      "products/img/1.jpg"
+    ],
+    "colors": [
+      "Rust",
+      "Cream",
+      "Midnight Blue"
+    ]
+  }
+]

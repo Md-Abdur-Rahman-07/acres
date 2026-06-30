@@ -1,0 +1,179 @@
+/* Template Options */
+
+/*
+	--//-- 1. Color Options --//--
+
+	- Theme color - d42d2d  (rgba - 212, 45, 45);
+	
+	--//-- 2. Theme Font --//--
+   
+	- Main font - Open Sans;	
+	
+*/
+
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+body,
+code,
+body #mc_signup_submit,
+input,
+textarea {
+	font-family: 'Open Sans', sans-serif; /* Main font */
+}
+
+.non_retina_image,
+.retina_image {
+	width:204px;
+	height:36px;
+}
+
+::selection {
+	background:#d42d2d; /* Theme color */
+}
+::-moz-selection {
+	background:#d42d2d; /* Theme color */
+}
+
+/* Headers */
+h1 {
+	font-size:41px;
+	line-height:45px;
+}
+h2 {
+	font-size:37px;
+	line-height:39px;
+}
+h3 {
+	font-size:32px;
+	line-height:39px;
+}
+h4 {
+	font-size:20px;
+	line-height:25px;
+}
+h5 {
+	font-size:16px;
+	line-height:22px;
+}
+h6 {
+	font-size:14px;
+	line-height:24px;
+}
+
+.bc_area {
+	background-image: url(../img/header_bg.jpg); /* Breadcrumbs Bg */
+}
+
+a,
+.summary .amount span,
+.product-rating .review-link:hover,
+.product_category a:hover,
+.shop_list li h3:hover,
+.product_meta a.button:hover,
+.logo_links_cont a:hover,
+.breadcrumbs a:hover,
+.sidepanel a:hover,
+.acc_togg_title:hover span,
+.item_info h5 a:hover,
+.teamlink:hover i,
+.shortcode_tabs .shortcode_tab_item_title:hover,
+.views_likes:hover .post_likes_add,
+.acc_togg_title.state-active span,
+.dropcap.type3,
+.optionset li.selected a,
+.most_popular .currperiod,
+.module_portfolio .optionset a:hover,
+.most_popular .currprice,
+.horizontal_menu ul li a:hover,
+.entry-title a:hover,
+.preview_meta_data a:hover,
+.page .bloglisting_post .post_preview .post_otput_container .meta span a:hover,
+.archive .bloglisting_post .post_preview .post_otput_container .meta span a:hover,
+.home .bloglisting_post .post_preview .post_otput_container .meta span a:hover,
+.page .bloglisting_post .post_preview h3.entry-title a:hover,
+.archive .bloglisting_post .post_preview h3.entry-title a:hover,
+.home .bloglisting_post .post_preview h3.entry-title a:hover,
+.horizontal_menu ul li.current-menu-parent a,
+.horizontal_menu ul li.current-menu-item a,
+.page-template-page-albums .bc_content h6 a:hover,
+.page-template-page-albums .bc_likes:hover,
+.shortcode_iconbox a:hover .ico,
+.shortcode_iconbox a:hover .iconbox_title,
+.shortcode_iconbox a:hover .iconbox_body,
+.fullscreen_block .fw_preview_wrapper .blogpost_title a:hover,
+.postmeta div a:hover,
+.single-port .thisprev a:hover,
+.single .thisprev a:hover,
+.single-port .thisnext a:hover,
+.single .thisnext a:hover,
+.single-port .meta span a:hover,
+.single .meta span a:hover,
+.single ol.commentlist li .stand_comment .thiscommentbody .comment_info .author_name a.comment-edit-link:hover,
+.single ol.commentlist li .stand_comment .thiscommentbody .comment_info .comments a.comment-reply-link:hover,
+.single form.comment-form .logged-in-as a:hover,
+.fw_block .is_masonry .fw_preview_wrapper .inner h6.blogpost_title a:hover,
+.grid_title_ajax_isotope_block .fw_preview_wrapper .inner h6.blogpost_title a:hover,
+.fw_block .is_masonry .fw_preview_wrapper .inner .inmeta .post_likes:hover,
+.grid_title_ajax_isotope_block .fw_preview_wrapper .inner .inmeta .post_likes:hover,
+.page .portfolio_block .post_preview .preview_wrapper .preview_topblock h3 a:hover,
+.page .portfolio_block .post_preview .preview_wrapper .preview_topblock .meta .post_likes:hover,
+.page .portfolio_block .post_preview .preview_wrapper .preview_topblock .meta span a:hover,
+.page .bloglisting_post.type2 .meta span a:hover,
+.right-sidebar-block .widget_search input,
+.left-sidebar-block .widget_search input,
+.mc_merge_var input.mc_input,
+.block404 .search_form_block input.field_search {
+	color:#d42d2d; /* Theme color */
+}
+
+.shop_list li span.onsale,
+.single-port .thisprev a:hover:before,
+.single .thisprev a:hover:before,
+.single-port .thisnext a:hover:after,
+.single .thisnext a:hover:after,
+.btn_type1:hover,
+.btn_type3:hover,
+.btn_type4:hover,
+.page form.wpcf7-form p input[type="submit"]:hover {
+	background-color: #d42d2d; /* Theme color */
+}
+
+.module_price_table .shortcode_button:hover .btn_text {
+	color:#d42d2d !important; /* Theme color */
+}
+
+.most_popular .price_item_title,
+.most_popular .price_item_btn .shortcode_button,
+.btn_type5,
+.most_popular .shortcode_button:after {
+	background-color:#d42d2d; /* Theme color */
+}
+
+.most_popular .shortcode_button:after,
+.module_price_table .most_popular .shortcode_button {
+	background-color:#d42d2d !important; /* Theme color */
+}
+
+.shortcode_blockquote.type3,
+.most_popular .price_item_title,
+.most_popular .shortcode_button {
+	border-color:#d42d2d; /* Theme color */
+}
+.contact_form input[type="submit"]:hover {
+	background:#d42d2d; /* Theme color */
+}
+
+.shop_table .product-subtotal .amount,
+.shop_table .product-name a:hover,
+.cart_info .fl span,
+.cart-collaterals .cart_totals h2.calc a:hover {
+	color:#d42d2d; /* Theme color */
+}
+.images span.onsale {
+	background:#d42d2d; /* Theme color */
+}
