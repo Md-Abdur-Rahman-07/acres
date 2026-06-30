@@ -385,114 +385,112 @@
                                     <p>with a constant barage of sales emails.</p>
                                     <div id="mc_signup">
 
-                                        <form id="mc_signup_form">
+                                    <form id="mc_signup_form">
 
-                                            <div id="mc_subheader">
-                                                Nulum tincidunt lectus a eros porta nec los tempus nec vestibulum lorem
-                                                eget diam.
-                                            </div>
+    <div id="mc_subheader">
+        Nulum tincidunt lectus a eros porta nec los tempus nec vestibulum lorem eget diam.
+    </div>
 
-                                            <div class="mc_form_inside">
+    <div class="mc_form_inside">
 
-                                                <div class="mc_merge_var">
-                                                    <label for="mc_mv_EMAIL"
-                                                        class="mc_var_label mc_header mc_header_email">
-                                                        Email Address
-                                                    </label>
+        <div class="mc_merge_var">
 
-                                                    <input type="email" name="mc_mv_EMAIL" id="mc_mv_EMAIL"
-                                                        class="mc_input" placeholder="Enter your email" required>
-                                                </div>
+            <label
+                for="mc_mv_EMAIL"
+                class="mc_var_label mc_header mc_header_email">
 
-                                                <div class="mc_signup_submit">
-                                                    <input type="submit" id="mc_signup_submit" value="Subscribe"
-                                                        class="button">
-                                                </div>
+                Email Address
 
-                                                <div id="newsletter-msg"></div>
+            </label>
 
-                                            </div>
+            <input
+                type="email"
+                id="mc_mv_EMAIL"
+                class="mc_input"
+                required>
 
-                                        </form>
-                                        <script>
+        </div>
+
+        <div class="mc_signup_submit">
+
+            <input
+                type="submit"
+                id="mc_signup_submit"
+                class="button"
+                value="Subscribe">
+
+        </div>
+
+        <div id="newsletter-msg"></div>
+
+    </div>
+
+</form>
+<script>
+
 const form = document.getElementById("mc_signup_form");
 const btn = document.getElementById("mc_signup_submit");
 const msg = document.getElementById("newsletter-msg");
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbw7_JM3fqj_0q_40z92sbyScDHzTzVORgd1Par2bdgjEvjYEAwjPjWxxp1ZQIFqUWq7/exechttps://script.google.com/macros/s/AKfycbw7_JM3fqj_0q_40z92sbyScDHzTzVORgd1Par2bdgjEvjYEAwjPjWxxp1ZQIFqUWq7/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbw7_JM3fqj_0q_40z92sbyScDHzTzVORgd1Par2bdgjEvjYEAwjPjWxxp1ZQIFqUWq7/exec";
 
-form.addEventListener("submit", async function (e) {
+form.addEventListener("submit", async function(e){
 
     e.preventDefault();
-
-    msg.innerHTML = "";
-    msg.className = "";
 
     btn.disabled = true;
     btn.value = "Submitting...";
 
-    const formData = new FormData(form);
+    msg.innerHTML = "";
+    msg.className = "";
 
-    try {
+    try{
 
-        const response = await fetch(scriptURL, {
-            method: "POST",
-            body: formData,
-            redirect: "follow"
+        const response = await fetch(scriptURL,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                email:document.getElementById("mc_mv_EMAIL").value
+            })
         });
 
-        const text = await response.text();
-        console.log("Raw Response:", text);
+        const data = await response.json();
 
-        let data;
-
-        try {
-            data = JSON.parse(text);
-        } catch (err) {
-            throw new Error("Invalid JSON returned: " + text);
-        }
-
-        console.log("Parsed Response:", data);
+        console.log(data);
 
         btn.disabled = false;
         btn.value = "Subscribe";
 
-        switch (data.status) {
+        if(data.success){
 
-            case "success":
-                msg.innerHTML = "Subscribed successfully!";
-                msg.className = "success";
-                form.reset();
-                break;
+            msg.innerHTML = data.message;
+            msg.className = "success";
 
-            case "exists":
-                msg.innerHTML = "Already subscribed.";
-                msg.className = "error";
-                break;
+            form.reset();
 
-            case "error":
-                msg.innerHTML = data.message || "Something went wrong.";
-                msg.className = "error";
-                break;
+        }else{
 
-            default:
-                msg.innerHTML = "Unexpected server response.";
-                msg.className = "error";
-                console.log(data);
+            msg.innerHTML = data.message;
+            msg.className = "error";
+
         }
 
-    } catch (error) {
+    }catch(err){
 
-        console.error(error);
+        console.error(err);
 
         btn.disabled = false;
         btn.value = "Subscribe";
 
-        msg.innerHTML = "Server error. Check browser console.";
+        msg.innerHTML = "Unable to connect to server.";
         msg.className = "error";
+
     }
 
 });
+
 </script>
 
                                     </div>
