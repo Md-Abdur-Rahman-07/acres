@@ -385,113 +385,159 @@
                                     <p>with a constant barage of sales emails.</p>
                                     <div id="mc_signup">
 
-                                    <form id="mc_signup_form">
+                                        <form id="newsletterForm">
 
-    <div id="mc_subheader">
-        Nulum tincidunt lectus a eros porta nec los tempus nec vestibulum lorem eget diam.
-    </div>
+                                            <div id="mc_subheader">
+                                                Nulum tincidunt lectus a eros porta nec los tempus nec vestibulum lorem
+                                                eget diam.
+                                            </div>
 
-    <div class="mc_form_inside">
+                                            <div class="mc_form_inside">
 
-        <div class="mc_merge_var">
+                                                <div class="mc_merge_var">
 
-            <label
-                for="mc_mv_EMAIL"
-                class="mc_var_label mc_header mc_header_email">
 
-                Email Address
 
-            </label>
+                                                    <input type="email" id="email" placeholder="Enter email" required>
 
-            <input
-                type="email"
-                id="mc_mv_EMAIL"
-                class="mc_input"
-                required>
+                                                </div>
 
-        </div>
+                                                <div class="mc_signup_submit">
 
-        <div class="mc_signup_submit">
+                                                    <input type="submit" class="button" value="Subscribe">
 
-            <input
-                type="submit"
-                id="mc_signup_submit"
-                class="button"
-                value="Subscribe">
+                                                </div>
 
-        </div>
+                                                <div id="message"></div>
 
-        <div id="newsletter-msg"></div>
+                                            </div>
 
-    </div>
+                                        </form>
+                                        <style>
+                                            /* Newsletter Form */
+                                            .mc_merge_var {
+                                                display: inline-block;
+                                                vertical-align: top;
+                                                width: 100%;
+                                            }
 
-</form>
-<script>
+                                            .mc_signup_submit {
+                                                display: inline-block;
+                                                vertical-align: top;
 
-const form = document.getElementById("mc_signup_form");
-const btn = document.getElementById("mc_signup_submit");
-const msg = document.getElementById("newsletter-msg");
+                                            }
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbw7_JM3fqj_0q_40z92sbyScDHzTzVORgd1Par2bdgjEvjYEAwjPjWxxp1ZQIFqUWq7/exec";
+                                            .mc_merge_var input[type="email"] {
+                                                width: 100%;
+                                                height: 44px;
+                                                padding: 0 14px;
+                                                border: 2px solid #18b7d6;
+                                                border-right: none;
+                                                outline: none;
+                                                font-size: 13px;
+                                                text-transform: uppercase;
+                                                color: #555;
+                                                background: #fff;
+                                                box-sizing: border-box;
+                                            }
 
-form.addEventListener("submit", async function(e){
+                                            .mc_merge_var input[type="email"]::placeholder {
+                                                color: #555;
+                                                text-transform: uppercase;
+                                            }
 
-    e.preventDefault();
+                                            .mc_signup_submit input[type="submit"] {
+                                                width: auto;
+                                                height: 44px;
+                                                padding: 0 18px;
+                                                border: 2px solid #18b7d6;
+                                                background: #18b7d6;
+                                                color: #fff;
+                                                font-size: 13px;
+                                                font-weight: 700;
+                                                text-transform: uppercase;
+                                                cursor: pointer;
+                                                transition: 0.3s;
+                                                box-sizing: border-box;
+                                            }
 
-    btn.disabled = true;
-    btn.value = "Submitting...";
+                                            .mc_signup_submit input[type="submit"]:hover {
+                                                background: #0fa6c4;
+                                                border-color: #0fa6c4;
+                                            }
 
-    msg.innerHTML = "";
-    msg.className = "";
+                                            /* Responsive */
+                                            @media (max-width: 576px) {
 
-    try{
+                                                .mc_merge_var,
+                                                .mc_signup_submit {
+                                                    display: block;
+                                                    width: 100%;
+                                                }
 
-        const response = await fetch(scriptURL,{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-                email:document.getElementById("mc_mv_EMAIL").value
-            })
-        });
+                                                .mc_merge_var input[type="email"] {
+                                                    width: 100%;
+                                                    border-right: 2px solid #18b7d6;
+                                                    margin-bottom: 10px;
+                                                }
 
-        const data = await response.json();
+                                                .mc_signup_submit input[type="submit"] {
+                                                    width: 100%;
+                                                }
+                                            }
+                                        </style>
+                                        <script>
+                                            const scriptURL = "https://script.google.com/macros/s/AKfycbxu7kkiNvwwyq1J6rmtkPlNkbHH8bMSzuP0DhByOhYwrGROEs_CeVxqAkG91OuZ6eN8/exec";
 
-        console.log(data);
+                                            const form = document.getElementById("newsletterForm");
+                                            const message = document.getElementById("message");
 
-        btn.disabled = false;
-        btn.value = "Subscribe";
+                                            form.addEventListener("submit", async (e) => {
+                                                e.preventDefault();
 
-        if(data.success){
+                                                const email = document.getElementById("email").value.trim();
 
-            msg.innerHTML = data.message;
-            msg.className = "success";
+                                                message.textContent = "";
+                                                message.style.color = "#000";
 
-            form.reset();
+                                                try {
+                                                    const response = await fetch(scriptURL, {
+                                                        method: "POST",
+                                                        headers: {
+                                                            "Content-Type": "text/plain;charset=utf-8"
+                                                        },
+                                                        body: JSON.stringify({
+                                                            email: email
+                                                        })
+                                                    });
 
-        }else{
+                                                    const text = await response.text();
+                                                    console.log(text);
 
-            msg.innerHTML = data.message;
-            msg.className = "error";
+                                                    let data;
 
-        }
+                                                    try {
+                                                        data = JSON.parse(text);
+                                                    } catch (err) {
+                                                        throw new Error("Invalid response from server.");
+                                                    }
 
-    }catch(err){
+                                                    if (data.success) {
+                                                        message.style.color = "green";
+                                                        message.textContent = data.message;
+                                                        form.reset();
+                                                    } else {
+                                                        message.style.color = "red";
+                                                        message.textContent = data.message;
+                                                    }
 
-        console.error(err);
-
-        btn.disabled = false;
-        btn.value = "Subscribe";
-
-        msg.innerHTML = "Unable to connect to server.";
-        msg.className = "error";
-
-    }
-
-});
-
-</script>
+                                                } catch (err) {
+                                                    console.error(err);
+                                                    message.style.color = "red";
+                                                    message.textContent = "Something went wrong. Please try again.";
+                                                }
+                                            });
+                                        </script>
 
                                     </div>
                                 </div>

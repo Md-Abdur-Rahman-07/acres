@@ -96,7 +96,8 @@
                                                     <div class="module_content contact_form">
                                                         <div id="note"></div>
                                                         <div id="fields">
-                                                            <form id="ajax-contact-form" action="#">
+
+                                                            <!-- <form id="ajax-contact-form" action="#">
                                                                 <input type="text" name="name" value=""
                                                                     placeholder="Name *" />
                                                                 <input type="text" name="email" value=""
@@ -106,7 +107,88 @@
                                                                 <textarea name="message" id="message"
                                                                     placeholder="Message *"></textarea>
                                                                 <input type="submit" value="Submit">
+                                                            </form> -->
+                                                            <form id="aa_contact_form">
+
+                                                                <input type="text" id="aa_contact_name" name="name"
+                                                                    placeholder="Name *" required>
+
+                                                                <input type="email" id="aa_contact_email" name="email"
+                                                                    placeholder="Email *" required>
+
+                                                                <input type="text" id="aa_contact_subject"
+                                                                    name="subject" placeholder="Subject">
+
+                                                                <textarea id="aa_contact_message" name="message"
+                                                                    placeholder="Message *" required></textarea>
+
+                                                                <input type="submit" id="aa_contact_submit"
+                                                                    value="Submit">
+
+                                                                <div id="aa_contact_status"></div>
+
                                                             </form>
+                                                            <script>
+                                                                const contactScriptURL = "https://script.google.com/macros/s/AKfycbx_h7LDwvohTezVsf9FZNZWRm9-5LRquvzZkYNzGaZkFNGmHC90TY_KDWIAAjiroXN7/exec";
+
+                                                                const contactForm = document.getElementById("aa_contact_form");
+                                                                const contactStatus = document.getElementById("aa_contact_status");
+
+                                                                contactForm.addEventListener("submit", async function (e) {
+
+                                                                    e.preventDefault();
+
+                                                                    contactStatus.style.color = "#000";
+                                                                    contactStatus.textContent = "";
+
+                                                                    const data = {
+                                                                        name: document.getElementById("aa_contact_name").value.trim(),
+                                                                        email: document.getElementById("aa_contact_email").value.trim(),
+                                                                        subject: document.getElementById("aa_contact_subject").value.trim(),
+                                                                        message: document.getElementById("aa_contact_message").value.trim()
+                                                                    };
+
+                                                                    try {
+
+                                                                        const response = await fetch(contactScriptURL, {
+                                                                            method: "POST",
+                                                                            headers: {
+                                                                                "Content-Type": "text/plain;charset=utf-8"
+                                                                            },
+                                                                            body: JSON.stringify(data)
+                                                                        });
+                                                                        const text = await response.text();
+                                                                        console.log(text);
+
+                                                                        const result = JSON.parse(text);
+
+
+
+                                                                        if (result.success) {
+
+                                                                            contactStatus.style.color = "green";
+                                                                            contactStatus.textContent = result.message;
+
+                                                                            contactForm.reset();
+
+                                                                        } else {
+
+                                                                            contactStatus.style.color = "red";
+                                                                            contactStatus.textContent = result.message;
+
+                                                                        }
+
+                                                                    }
+                                                                    catch (err) {
+                                                                        console.error(err);
+
+                                                                        contactStatus.style.color = "red";
+                                                                        contactStatus.textContent = err.message;
+                                                                    }
+
+                                                                });
+                                                            </script>
+
                                                         </div>
                                                     </div>
                                                 </div>
