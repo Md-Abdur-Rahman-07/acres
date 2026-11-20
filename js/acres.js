@@ -243,15 +243,26 @@ drawer.addEventListener('click', event => {
 });
 desktop.addEventListener('change', () => { if (!desktop.matches && drawer.open) drawer.close(); });
 let catalogRequest;
+let cachedProducts;
 function catalog() {
   if (!catalogRequest) catalogRequest = loadCatalog().catch(error => { catalogRequest = null; throw error; });
   return catalogRequest;
 }
 async function openDrawer() {
-  if (!drawer.open) drawer.showModal();
+  if (drawer.open) return;
+  if (cachedProducts || !bagItems().length) {
+    renderBag(cachedProducts || [], drawerBody);
+    drawer.showModal();
+    return;
+  }
   drawerBody.textContent = 'Loading your bag…';
-  try { renderBag(await catalog(), drawerBody); }
-  catch { drawerBody.textContent = 'Unable to load your bag. Please try again.'; }
+  drawer.showModal();
+  try {
+    const products = await catalog();
+    if (drawer.open) renderBag(products, drawerBody);
+  } catch {
+    drawerBody.textContent = 'Unable to load your bag. Please try again.';
+  }
 }
 document.addEventListener('click', event => {
   const anchor = event.target.closest('a[href="shop_cart.html"]');
@@ -296,7 +307,8 @@ function initHomeReviews(products) {
 async function loadCatalog() {
   const response = await fetch('products/products.json');
   if (!response.ok) throw new Error('Catalog unavailable');
-  return response.json();
+  cachedProducts = await response.json();
+  return cachedProducts;
 }
 async function initProducts() {
   const products = await catalog();
